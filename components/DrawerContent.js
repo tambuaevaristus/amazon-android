@@ -10,7 +10,7 @@ import {
   Switch,
   Paragraph,
 } from "react-native-paper";
-import React from "react";
+import React, { useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
@@ -19,8 +19,11 @@ import ProductScreen from "../screens/ProductScreen";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function DrawerContent(props) {
-  //   const Drawer = createDrawerNavigator();
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  }
   return (
     <View
       style={{
@@ -44,7 +47,7 @@ function DrawerContent(props) {
                 }}
               >
                 <Title>Tambua Evaristus</Title>
-                <Caption style={styles.Caption}>@evaristustambua</Caption>
+                <Caption style={styles.Caption}>@evaristustambua@gmail.com</Caption>
               </View>
             </View>
           </View>
@@ -70,7 +73,7 @@ function DrawerContent(props) {
               <Icon name="home-outline" color={color} size={size} />
             )}
             label="Home"
-            onPress={() => {na}}
+            onPress={() => {props.navigation.navigate('Home')}}
           />
           <DrawerItem
             icon={({ color, size }) => (
@@ -86,7 +89,7 @@ function DrawerContent(props) {
             label="Bookmarks"
             onPress={() => {}}
           />
-{/* 
+          {/* 
           <DrawerItem
             icon={({ color, size }) => (
               <Icon name="setti-outline" color={color} size={size} />
@@ -105,16 +108,20 @@ function DrawerContent(props) {
         </Drawer.Section>
 
         <Drawer.Section title="Preferences">
-          <TouchableRipple>
-              <View style={styles.preferences}>
-                  <Text>Dark Theme</Text>
-                  <Switch/>
+          <TouchableRipple
+            onPress={() => {
+              toggleTheme();
+            }}
+          >
+            <View style={styles.preferences}>
+              <Text>Dark Theme</Text>
+              <View pointerEvents="none">
+                <Switch value="{isDarkTheme}" />
               </View>
+            </View>
           </TouchableRipple>
-      </Drawer.Section>
+        </Drawer.Section>
       </DrawerContentScrollView>
-
-    
 
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
