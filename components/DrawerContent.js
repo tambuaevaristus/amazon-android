@@ -14,8 +14,6 @@ import React, { useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import HomeScreen from "../screens/HomeScreen";
-import ProductScreen from "../screens/ProductScreen";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function DrawerContent(props) {
@@ -89,14 +87,14 @@ function DrawerContent(props) {
             label="Bookmarks"
             onPress={() => {}}
           />
-          {/* 
+          
           <DrawerItem
             icon={({ color, size }) => (
-              <Icon name="setti-outline" color={color} size={size} />
+              <Icon name="home-outline" color={color} size={size} />
             )}
-            label="Settings"
-            onPress={() => {}}
-          /> */}
+            label="Notification"
+            onPress={() => {props.navigation.navigate('Notifications')}}
+          />
 
           <DrawerItem
             icon={({ color, size }) => (
@@ -129,7 +127,7 @@ function DrawerContent(props) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
-          onPress={() => {}}
+          onPress={() => {props.navigation.navigate('Login')}}
         />
       </Drawer.Section>
     </View>
