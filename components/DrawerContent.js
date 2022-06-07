@@ -51,16 +51,70 @@ function DrawerContent(props) {
 
           <View style={styles.row}>
             <View style={styles.section}>
-              <Paragraph style={[styles.paragraph, styles.caption]}>100</Paragraph>
+              <Paragraph style={[styles.paragraph, styles.caption]}>
+                100
+              </Paragraph>
               <Caption style={styles.caption}>Followering</Caption>
             </View>
             <View style={styles.section}>
-              <Paragraph style={[styles.paragraph, styles.caption]}>60</Paragraph>
+              <Paragraph style={[styles.paragraph, styles.caption]}>
+                60
+              </Paragraph>
               <Caption style={styles.caption}>Followers</Caption>
             </View>
           </View>
         </View>
+        <Drawer.Section style={styles.bottomSection}>
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="home-outline" color={color} size={size} />
+            )}
+            label="Home"
+            onPress={() => {na}}
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="account-outline" color={color} size={size} />
+            )}
+            label="Profile"
+            onPress={() => {}}
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="bookmark-outline" color={color} size={size} />
+            )}
+            label="Bookmarks"
+            onPress={() => {}}
+          />
+{/* 
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="setti-outline" color={color} size={size} />
+            )}
+            label="Settings"
+            onPress={() => {}}
+          /> */}
+
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="account-check-outline" color={color} size={size} />
+            )}
+            label="Support"
+            onPress={() => {}}
+          />
+        </Drawer.Section>
+
+        <Drawer.Section title="Preferences">
+          <TouchableRipple>
+              <View style={styles.preferences}>
+                  <Text>Dark Theme</Text>
+                  <Switch/>
+              </View>
+          </TouchableRipple>
+      </Drawer.Section>
       </DrawerContentScrollView>
+
+    
 
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
@@ -102,7 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   paragraph: {
     fontWeight: "bold",
@@ -120,6 +174,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingHorizontal: 15,
   },
 });
