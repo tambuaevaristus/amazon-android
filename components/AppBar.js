@@ -19,27 +19,85 @@
 // };
 
 import React from "react";
-import { VStack, HStack, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, StatusBar } from "native-base";
+import {
+  VStack,
+  HStack,
+  Button,
+  IconButton,
+  Icon,
+  Text,
+  NativeBaseProvider,
+  Center,
+  Input,
+  Box,
+  StatusBar,
+  Image,
+} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-
-function AppBar() {
-  return <>
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
+function AppBar(navigation) {
+  return (
+    <>
       <StatusBar bg="#3700B3" barStyle="light-content" />
       <Box safeAreaTop bg="#6200ee" />
-      <HStack bg="#6200ee" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="400">
+      <HStack
+        bg="black"
+        px="1"
+        justifyContent="space-around"
+        alignItems="center"
+        w="100%"
+        h="50"
+        maxW="400"
+      >
         <HStack alignItems="center">
-          <IconButton icon={<Icon size="sm" as={MaterialIcons} onPress={() => navigation.openDrawer()} name="menu" color="white" />} />
-          <Text color="white" fontSize="20" fontWeight="bold">
-            Home
-          </Text>
+          <Center>
+            <Image
+              source={{
+                uri: "https://pngimg.com/uploads/amazon/amazon_PNG25.png",
+              }}
+              alt="Alternate Text"
+              size="md"
+              mt="15"
+              resizeMode="contain"
+            />
+          </Center>
         </HStack>
         <HStack>
-          <IconButton icon={<Icon as={MaterialIcons} name="favorite" size="sm" color="white" />} />
-          <IconButton icon={<Icon as={MaterialIcons} name="search" size="sm" color="white" />} />
-          <IconButton icon={<Icon as={MaterialIcons} name="more-vert" size="sm" color="white" />} />
+          <IconButton
+            icon={
+              <Icon as={MaterialIcons} name="search" size="sm" color="white" />
+            }
+          />
         </HStack>
+      
+        
       </HStack>
-    </>;
+        <Box alignItems="center">
+          <Input
+            type="text"
+            w="100%"
+            py="0"
+            h='50'
+            InputRightElement={
+              <IconButton
+              bg='yellow.500'
+              h="100%"
+            icon={
+              <Icon as={MaterialIcons} name="search" size="lg" color="yellow" />
+            }
+          />
+            }
+            placeholder="Password"
+          />
+        </Box>
+    </>
+  );
 }
 
 export default AppBar;
