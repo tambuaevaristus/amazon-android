@@ -33,6 +33,7 @@ import {
   StatusBar,
   Image,
 } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import {
@@ -71,31 +72,40 @@ function AppBar(navigation) {
         <HStack>
           <IconButton
             icon={
-              <Icon as={MaterialIcons} name="search" size="sm" color="white" />
+              <Icon
+                as={AntDesign}
+                name="shoppingcart"
+                size="lg"
+                color="white"
+              />
             }
           />
+          <Text color="white">16</Text>
         </HStack>
-      
-        
       </HStack>
-        <Box alignItems="center">
-          <Input
-            type="text"
-            w="100%"
-            py="0"
-            h='50'
-            InputRightElement={
-              <IconButton
-              bg='yellow.500'
+      <Box alignItems="center">
+        <Input
+          type="text"
+          w="100%"
+          py="0"
+          h="50"
+          InputRightElement={
+            <IconButton
+              bg="yellow.600"
               h="100%"
-            icon={
-              <Icon as={MaterialIcons} name="search" size="lg" color="yellow" />
-            }
-          />
-            }
-            placeholder="Password"
-          />
-        </Box>
+              icon={
+                <Icon
+                  as={MaterialIcons}
+                  name="search"
+                  size="lg"
+                  color="yellow"
+                />
+              }
+            />
+          }
+          placeholder="Search product"
+        />
+      </Box>
     </>
   );
 }

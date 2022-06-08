@@ -6,6 +6,7 @@ import { VStack, HStack, Box, Divider, ScrollView } from "native-base";
 function HomeScreen({ navigation }) {
   return (
     <ScrollView>
+      
       <VStack>
         <Product />
         <Product />
