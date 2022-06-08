@@ -8,22 +8,42 @@ import ProductScreen from "../screens/ProductScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import LoginScreen from "../screens/LoginScreen";
 
-
-
 function DrawerNavigation() {
+  const Drawer = createDrawerNavigator();
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+        <Drawer.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Drawer.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Product"
+          component={ProductScreen}
+        />
+        <Drawer.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Notifications"
+          component={NotificationScreen}
+        />
+        <Drawer.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Login"
+          component={LoginScreen}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
 
-    const Drawer = createDrawerNavigator();
-    return (
-      <NavigationContainer>
-        <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-          <Drawer.Screen name="Home" component={HomeScreen} />
-          <Drawer.Screen name="Product" component={ProductScreen} />
-          <Drawer.Screen name="Notifications" component={NotificationScreen} />
-          <Drawer.Screen name="Login" component={LoginScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    );
-  }
-
-  export default DrawerNavigation;
-  
+export default DrawerNavigation;

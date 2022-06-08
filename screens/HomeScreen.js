@@ -1,13 +1,11 @@
 import * as React from "react";
 import { Button, View, Text } from "react-native";
+import Product from "../components/Product";
 
 function HomeScreen({ navigation }) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Button
-          onPress={() => navigation.navigate("Notifications")}
-          title="Go to notifications"
-        />
+      <View style={{ padding: 20 }}>
+        <Product />
       </View>
     );
   }

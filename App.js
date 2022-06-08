@@ -8,13 +8,20 @@ import DrawerContent from "./components/DrawerContent";
 import DrawerNavigation from "./components/DrawerNavigation";
 import MyComponent from "./components/MyComponent";
 import MyTabs from "./components/BottomTabNavigation";
+import AppBar from "./components/AppBar";
+import { NativeBaseProvider, Center } from "native-base";
 export default function App() {
   return (
     <>
-      <DrawerNavigation />
+      <NativeBaseProvider>
+
+          <AppBar />
+          <DrawerNavigation />
+
+      </NativeBaseProvider>
       {/* <MyComponent /> */}
       {/* <NavigationContainer>
-        <MyTabs />
+       
       </NavigationContainer> */}
     </>
   );
