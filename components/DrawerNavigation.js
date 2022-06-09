@@ -7,42 +7,56 @@ import HomeScreen from "../screens/HomeScreen";
 import ProductScreen from "../screens/ProductScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import LoginScreen from "../screens/LoginScreen";
+import AppBar from "./AppBar";
 
 function DrawerNavigation() {
   const Drawer = createDrawerNavigator();
   return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Home"
-          component={HomeScreen}
-        />
-        <Drawer.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Product"
-          component={ProductScreen}
-        />
-        <Drawer.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Notifications"
-          component={NotificationScreen}
-        />
-        <Drawer.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Login"
-          component={LoginScreen}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <>       
+
+      <AppBar />
+      {/* <NavigationContainer> */}
+        <Drawer.Navigator
+          drawerContent={(props) => <DrawerContent {...props} />}
+        >
+          {/* <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Onboarding"
+            component={OnboardingScreen}
+          /> */}
+          <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Home"
+            component={HomeScreen}
+          />
+          <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Product"
+            component={ProductScreen}
+          />
+          <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Notifications"
+            component={NotificationScreen}
+          />
+          <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Login"
+            component={LoginScreen}
+          />
+        </Drawer.Navigator>
+      {/* </NavigationContainer> */}
+    </>
   );
 }
 

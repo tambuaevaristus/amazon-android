@@ -1,23 +1,3 @@
-// import * as React from 'react';
-// import { Appbar } from 'react-native-paper';
-
-// const Appbar = () => {
-//   const _goBack = () => console.log('Went back');
-
-//   const _handleSearch = () => console.log('Searching');
-
-//   const _handleMore = () => console.log('Shown more');
-
-//   return (
-//     <Appbar.Header>
-//       <Appbar.BackAction onPress={_goBack} />
-//       <Appbar.Content title="Title" subtitle="Subtitle" />
-//       <Appbar.Action icon="magnify" onPress={_handleSearch} />
-//       <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
-//     </Appbar.Header>
-//   );
-// };
-
 import React from "react";
 import {
   VStack,
@@ -42,7 +22,13 @@ import {
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
+import { useStateValue } from "../StateProvider";
+
 function AppBar(navigation) {
+
+  const [{basket}, dispatch] = useStateValue();
+
+
   return (
     <>
       <StatusBar bg="#3700B3" barStyle="light-content" />
@@ -79,8 +65,12 @@ function AppBar(navigation) {
                 color="white"
               />
             }
+
+            onPress={()=>{
+              console.log("card length:"+ basket.length)
+            }}
           />
-          <Text color="white">16</Text>
+          <Text color="white">{basket.length}</Text>
         </HStack>
       </HStack>
       <Box alignItems="center">
