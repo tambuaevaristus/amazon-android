@@ -25,39 +25,25 @@ import {
   Link,
 } from "native-base";
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const auth = getAuth(app);
   // const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
-  console.log(email, password);
-  const signIn = () => {
-    // e.preventDefault();
-    //   firebase stuff
 
-    console.log(email, password);
+  const isCorrectPassword = password===newPassword;
+  // check if passwords match
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
+  
 
-        if (auth) {
-          navigation.navigate("DrawerNavigation");
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert("sorry ya wahala de : " + errorCode);
-      });
-  };
+  const register = () => {
 
-  const register = (e) => {
-    e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
+
+    isCorrectPassword ? 
+      createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -75,20 +61,22 @@ const LoginScreen = ({ navigation }) => {
 
         alert(errorCode);
         // ..
-      });
+      })  : alert("password mismatch")
+    
   };
 
   return (
-    <Center w="100%" h="100%" mt={-10}>
-      <Image
-        source={{
-          uri: "https://www.freepnglogos.com/uploads/amazon-png-logo-vector/amazon-png-logo-vector-1.png",
-        }}
-        alt="Alternate Text"
-        size="xl"
-        resizeMode="contain"
-      />
-
+    <Center w="100%" h="100%" mt={-10} >
+            <Image
+              source={{
+                uri: "https://www.freepnglogos.com/uploads/amazon-png-logo-vector/amazon-png-logo-vector-1.png",
+              }}
+              alt="Alternate Text"
+              size="xl"
+            
+              resizeMode="contain"
+            />
+   
       <Box
         safeArea
         p="5"
@@ -141,6 +129,14 @@ const LoginScreen = ({ navigation }) => {
               bg="white"
               onChangeText={(password) => setPassword(password)}
             />
+            <FormControl.Label>Confirm Password</FormControl.Label>
+            <Input
+              type="password"
+              borderColor="orange.900"
+              value={newPassword}
+              bg="white"
+              onChangeText={(newPassword) => setNewPassword(newPassword)}
+            />
             <Link
               _text={{
                 fontSize: "xs",
@@ -153,8 +149,8 @@ const LoginScreen = ({ navigation }) => {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" onPress={signIn} colorScheme="orange">
-            Sign in
+          <Button mt="2" onPress={register} colorScheme="orange">
+            Sign Up
           </Button>
           <HStack mt="6" justifyContent="center">
             <Text
@@ -164,7 +160,7 @@ const LoginScreen = ({ navigation }) => {
                 color: "warmGray.200",
               }}
             >
-              I'm a new user.{" "}
+              I have an acccount {" "}
             </Text>
             <Link
               _text={{
@@ -172,9 +168,11 @@ const LoginScreen = ({ navigation }) => {
                 fontWeight: "medium",
                 fontSize: "sm",
               }}
-              onPress={()=> navigation.navigate('SignUp')}
+              onPress={()=>
+                navigation.navigate('Login')
+              }
             >
-              Sign Up
+              Go to Login
             </Link>
           </HStack>
         </VStack>
@@ -183,4 +181,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;
