@@ -26,17 +26,16 @@ import {
 } from "native-base";
 
 const LoginScreen = ({ navigation }) => {
-  const auth = getAuth(app);
+  const auth = getAuth();
   // const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(email, password);
   const signIn = () => {
     // e.preventDefault();
     //   firebase stuff
 
-    console.log(email, password);
+   
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

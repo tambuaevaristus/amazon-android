@@ -15,13 +15,21 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useStateValue } from "../StateProvider";
+import { getAuth, signOut } from "firebase/auth";
 
 function DrawerContent(props) {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const [{ basket, user }, dispatch] = useStateValue();
+
+  const auth = getAuth();
+
+  // console.log("user>>>>"+ auth.currentUser)
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   }
+
   return (
     <View
       style={{
@@ -45,7 +53,7 @@ function DrawerContent(props) {
                 }}
               >
                 <Title>Tambua Evaristus</Title>
-                <Caption style={styles.Caption}>@evaristustambua@gmail.com</Caption>
+                <Caption style={styles.Caption}>{auth.currentUser.email}</Caption>
               </View>
             </View>
           </View>
