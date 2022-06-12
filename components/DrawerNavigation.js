@@ -8,6 +8,7 @@ import ProductScreen from "../screens/ProductScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import LoginScreen from "../screens/LoginScreen";
 import AppBar from "./AppBar";
+import Checkout from "./Checkout";
 
 function DrawerNavigation() {
   const Drawer = createDrawerNavigator();
@@ -44,8 +45,8 @@ function DrawerNavigation() {
             options={{
               headerShown: false,
             }}
-            name="Notifications"
-            component={NotificationScreen}
+            name="Checkout"
+            component={Checkout}
           />
           <Drawer.Screen
             options={{

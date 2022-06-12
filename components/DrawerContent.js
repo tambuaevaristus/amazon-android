@@ -92,8 +92,8 @@ function DrawerContent(props) {
             icon={({ color, size }) => (
               <Icon name="bookmark-outline" color={color} size={size} />
             )}
-            label="Bookmarks"
-            onPress={() => {}}
+            label="Checkout Items"
+            onPress={() => {props.navigation.navigate('Checkout')}}
           />
           
           <DrawerItem

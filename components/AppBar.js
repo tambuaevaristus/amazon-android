@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   VStack,
@@ -13,6 +14,7 @@ import {
   StatusBar,
   Image,
 } from "native-base";
+import { EventRegister } from "react-native-event-listeners";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
@@ -66,8 +68,8 @@ function AppBar(navigation) {
               />
             }
 
-            onPress={()=>{
-              console.log("card length:"+ basket.length)
+            onPress={(e)=>{
+                EventRegister.emit("ShoppingCartBtn", e)
             }}
           />
           <Text color="white">{basket.length}</Text>
