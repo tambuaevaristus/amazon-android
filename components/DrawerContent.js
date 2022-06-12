@@ -101,7 +101,7 @@ function DrawerContent(props) {
               <Icon name="home-outline" color={color} size={size} />
             )}
             label="Notification"
-            onPress={() => {props.navigation.navigate('Notifications')}}
+            onPress={() => {props.navigation.navigate('AddProduct')}}
           />
 
           <DrawerItem
