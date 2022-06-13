@@ -10,6 +10,7 @@ import LoginScreen from "../screens/LoginScreen";
 import AppBar from "./AppBar";
 import Checkout from "./Checkout";
 import AddProductScreen from "../screens/AddProductScreen";
+import UserProfileScreen from "../screens/UserProfileScreen";
 
 function DrawerNavigation() {
   const Drawer = createDrawerNavigator();
@@ -55,6 +56,13 @@ function DrawerNavigation() {
             }}
             name="AddProduct"
             component={AddProductScreen}
+          />
+           <Drawer.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="UserProfile"
+            component={UserProfileScreen}
           />
         </Drawer.Navigator>
       {/* </NavigationContainer> */}

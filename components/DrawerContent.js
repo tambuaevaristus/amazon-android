@@ -90,7 +90,7 @@ function DrawerContent(props) {
               <Icon name="account-outline" color={color} size={size} />
             )}
             label="Profile"
-            onPress={() => {}}
+            onPress={() => {props.navigation.navigate("UserProfile")}}
           />
           <DrawerItem
             icon={({ color, size }) => (
