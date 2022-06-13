@@ -24,6 +24,9 @@ import {
   FormControl,
   Link,
 } from "native-base";
+import { db } from "../firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+
 
 const SignUpScreen = ({ navigation }) => {
   const auth = getAuth(app);
@@ -31,9 +34,10 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const usersCollectionRef = collection(db,"users" )
 
 
-  const isCorrectPassword = password===newPassword;
+  const isCorrectPassword = password === newPassword;
   // check if passwords match
 
   
@@ -45,15 +49,15 @@ const SignUpScreen = ({ navigation }) => {
     isCorrectPassword ? 
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+       
         // Signed in
         const user = userCredential.user;
         alert("successfully created an acccount");
+        navigation.navigate("DrawerNavigation");
+         // Add user to database
 
-        if (auth) {
-          // history.push('/')
-          navigation.navigate("DrawerNavigation");
-        }
-        // ...
+         setDoc(doc(db, "users", auth.currentUser.uid ), { email: email, password: password });
+
       })
       .catch((error) => {
         const errorCode = error.code;

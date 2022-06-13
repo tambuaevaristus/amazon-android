@@ -9,13 +9,16 @@ import { EventRegister } from "react-native-event-listeners";
 function HomeScreen({ navigation }) {
 
   const [ShopingCartBtn, setShopingCartBtn] = useState();
-  const [condition, setCondition] = useState(true);
-
+  const [condition, setCondition] = useState(false);
+  // const condition = true;
 
   React.useEffect(() => {
     const listener = EventRegister.addEventListener('ShoppingCartBtn', (data) => {
       //  setShopingCartBtn(data);
-      setCondition(!condition)
+      // setCondition(()=>setCondition(!condition))
+      
+       setCondition(!condition)
+      console.log(condition)
       
   })
     return () => {
