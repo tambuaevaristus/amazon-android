@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React, {useState} from "react";
 import Products from "../components/Products";
 import { VStack, HStack, Box, Divider, ScrollView } from "native-base";
 import { StateProvider } from "../StateProvider";
@@ -8,11 +8,15 @@ import { EventRegister } from "react-native-event-listeners";
 
 function HomeScreen({ navigation }) {
 
-  const [ShopingCartBtn, setShopingCartBtn] = React.useState();
+  const [ShopingCartBtn, setShopingCartBtn] = useState();
+  const [condition, setCondition] = useState(true);
+
 
   React.useEffect(() => {
     const listener = EventRegister.addEventListener('ShoppingCartBtn', (data) => {
-       setShopingCartBtn(data);
+      //  setShopingCartBtn(data);
+      setCondition(!condition)
+      
   })
     return () => {
       EventRegister.removeEventListener(listener)
@@ -20,15 +24,11 @@ function HomeScreen({ navigation }) {
   }, []);
 
 
-  
-  
-
-
-
 
   return (
     <ScrollView>
-        {ShopingCartBtn ? <Checkout/> : <Products/>}
+        {
+        condition ? <Products/> : <Checkout/>}
     </ScrollView>
   );
 }
