@@ -17,6 +17,10 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useStateValue } from "../StateProvider";
 import { getAuth, signOut } from "firebase/auth";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { SimpleLineIcons } from '@expo/vector-icons'; 
+
+
 
 function DrawerContent(props) {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
@@ -90,7 +94,8 @@ function DrawerContent(props) {
           />
           <DrawerItem
             icon={({ color, size }) => (
-              <Icon name="bookmark-outline" color={color} size={size} />
+              // <Icon name="basket-loaded" color={color} size={size} />
+              <SimpleLineIcons name="basket-loaded" size={24} color="black" />
             )}
             label="Checkout Items"
             onPress={() => {props.navigation.navigate('Checkout')}}
@@ -98,9 +103,9 @@ function DrawerContent(props) {
           
           <DrawerItem
             icon={({ color, size }) => (
-              <Icon name="home-outline" color={color} size={size} />
+              <Icon name="basket-plus" color={color} size={size} />
             )}
-            label="Notification"
+            label="Add Product"
             onPress={() => {props.navigation.navigate('AddProduct')}}
           />
 
