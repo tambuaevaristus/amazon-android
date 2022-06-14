@@ -24,16 +24,35 @@ import {
   doc,
   update,
   updateDoc,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
 
 const AddProductScreen = () => {
+const auth = getAuth();
+
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState({});
-  function handleSubmit() {}
+  const productRef = collection(db, "products");
+  function handleSubmit() {
+
+    addDoc(productRef,{
+       title: title,
+       description:description,
+       image: image,
+       rating: rating,
+       userId : auth.currentUser.uid,
+
+    })
+
+    setTitle('');
+    setDescription('');
+    setRating({});
+    setImage(" ")
+  }
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -54,7 +73,7 @@ const AddProductScreen = () => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <VStack width="90%" mx="3" pl="10" maxW="300px">
+        <VStack width="90%" mx="3" mb="5" pl="10" maxW="300px">
           <Center>
             <Text bold mt="3" fontSize="lg">
               Add Product
@@ -69,8 +88,9 @@ const AddProductScreen = () => {
               Title
             </FormControl.Label>
             <Input
-              placeholder="John"
-              //   onChangeText={}
+              placeholder="Enter product name"
+              value={title}
+                onChangeText={(e)=>setTitle(e)}
             />
           </FormControl>
 
@@ -87,6 +107,8 @@ const AddProductScreen = () => {
               placeholder="Enter Description"
               w="100%"
               maxW="300"
+              value={description}
+                onChangeText={(d)=>setDescription(d)}
             />
           </FormControl>
 
