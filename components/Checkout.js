@@ -1,26 +1,21 @@
 import { StyleSheet, Text, View} from "react-native";
 import React, {useState} from "react";
-import Product from "../components/Product";
+import CheckoutProduct from "../components/CheckoutProduct";
 import { useStateValue } from "../StateProvider";
 import { VStack, HStack, Box, Divider, ScrollView } from "native-base";
+import { getBasketTotal } from "../reducer";
 
 const Checkout = () => {
   const [{ basket }, dispatch] = useStateValue("");
   const [price, setPrice] = useState(0);
 
-
-     const basketPrice = basket?.reduce((amount, item) => item.price + amount, 0);
-     setPrice(basketPrice);
-    
-     console.log(price)
-
   return (
     <VStack>
-      <View>
-        <Text>{price}</Text>
+      <View p ="2" m="2" bg="grey">
+        <Text>{getBasketTotal(basket)}</Text>
       </View>
       {basket.map((item) => (
-        <Product
+        <CheckoutProduct
           id={item.id}
           title={item.title}
           description={item.description}

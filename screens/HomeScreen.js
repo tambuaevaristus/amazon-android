@@ -30,8 +30,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <ScrollView>
-        {
-        condition ? <Products/> : <Checkout/>}
+      <Products/> 
     </ScrollView>
   );
 }
