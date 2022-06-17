@@ -4,7 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerContent from "./DrawerContent";
 import HomeScreen from "../screens/HomeScreen";
-import ProductScreen from "../screens/ProductScreen";
+// import ProductScreen from "../screens/ProductScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import LoginScreen from "../screens/LoginScreen";
 import AppBar from "./AppBar";
@@ -36,13 +36,13 @@ function DrawerNavigation() {
             name="Home"
             component={HomeScreen}
           />
-          <Drawer.Screen
+          {/* <Drawer.Screen
             options={{
               headerShown: false,
             }}
             name="Product"
             component={ProductScreen}
-          />
+          /> */}
           <Drawer.Screen
             options={{
               headerShown: false,

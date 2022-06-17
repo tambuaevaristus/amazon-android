@@ -1,18 +1,45 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Product from "../components/Product";
+// import firestore from '@react-native-firebase/firestore';
+
+import {
+  collection,
+  getDocs,
+  doc,
+  update,
+  updateDoc,
+  addDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
 import { VStack, HStack, Box, Divider, ScrollView } from "native-base";
 
 function Products() {
+  const [products, setProducts] = useState([]);
+  const productRef = collection(db, "products");
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const data = await getDocs(productRef);
+      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getProducts();
+  }, []);
+
   return (
     <VStack>
-      <Product
-        id={1}
-        title="Google pixel 4"
-        description="Google pixel is the best phone in the world"
-        price={2000}
-        ratings={5}
-        image="https://m.media-amazon.com/images/I/61Qu8KYuynS._SL1500_.jpg"
-      />
+      {products.map((product) => {
+        return (
+        <Product
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          ratings={product.rating}
+          image="https://m.media-amazon.com/images/I/61Qu8KYuynS._SL1500_.jpg"
+        />)
+      })}
+
       <Product
         id={2}
         title="Apple Pro Watch"
