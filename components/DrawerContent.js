@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 import {
   Title,
   Text,
-  Avatar,
   Caption,
   Drawer,
   TouchableRipple,
@@ -31,6 +30,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { Avatar } from "native-base";
 
 function DrawerContent(props) {
   const auth = getAuth();
@@ -93,10 +93,17 @@ function DrawerContent(props) {
                   props.navigation.navigate("UserProfile");
                 }}
               >
-                <Avatar.Image
-                  source={require("../assets/mymy.jpg")}
+                {/* <Avatar.Image
+                  source={require(current_user.image ? current_user.image : "")}
                   size={50}
-                />
+                /> */}
+                 <Avatar
+              bg="indigo.500"
+              // my="2"
+              alignSelf="center"
+              size="lg"
+              source={{uri: current_user.image }}
+            ></Avatar>
               </TouchableOpacity>
               <View
                 style={{
