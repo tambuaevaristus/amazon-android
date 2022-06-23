@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   VStack,
   HStack,
+  Alert,
   Avatar,
   Text,
   View,
@@ -21,19 +22,23 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import {
   collection,
+  getDoc,
   getDocs,
   doc,
   update,
   updateDoc,
+  where,
+  query,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
+import { useToast } from "native-base";
 
-const UserProfileScreen = () => {
+const UserProfileScreen = ({ navigation }) => {
   const auth = getAuth();
+  const toast = useToast();
 
-  const [users, setUsers] = useState([]);
-  const usersCollectionRef = collection(db, "users");
+  const [user, setUser] = useState({});
   const email = auth.currentUser.email;
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
@@ -41,14 +46,38 @@ const UserProfileScreen = () => {
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
 
-  //   useEffect(() => {
-  //     const getUsers = async () => {
-  //       const data = await getDocs(usersCollectionRef);
-  //       console.log(data);
-  //     };
+  const usersCollectionRef = collection(db, "users");
+  const userRef = query(doc(db, "users", auth.currentUser.uid));
 
-  //     getUsers();
-  //   }, []);
+  useEffect(() => {
+    let subs = true;
+    const getUser = async () => {
+      await getDoc(userRef)
+        .then((res) => {
+          if (subs) {
+            if (res) {
+              console.log("User from useeffect", res?.data());
+              setUser(res?.data());
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("Error", err);
+          throw err;
+        });
+      // const user =await getDoc(userRef);
+      // const userOj = user.data();
+      // if(subs){
+      //   setUser(userOj);
+      // }
+    };
+    getUser();
+    return () => {
+      subs = false;
+    };
+  }, []);
+
+  console.log(user);
 
   const pickImage = async () => {
     console.log("pressed");
@@ -60,7 +89,7 @@ const UserProfileScreen = () => {
       quality: 1,
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -76,6 +105,16 @@ const UserProfileScreen = () => {
       gender: gender,
       phone: phone,
     });
+    toast.show({
+      render: () => {
+        return (
+          <Box bg="emerald.500" px="2" py="1" rounded="sm" mb={5}>
+            User Updated Successfully!!!
+          </Box>
+        );
+      },
+    });
+    navigation.navigate("Home");
   };
   return (
     <KeyboardAvoidingView>
@@ -86,14 +125,13 @@ const UserProfileScreen = () => {
               User Profile
             </Text>
           </Center>
-
           <TouchableOpacity onPress={pickImage}>
             <Avatar
               bg="indigo.500"
               my="2"
               alignSelf="center"
               size="xl"
-              source={{ uri: image }}
+              // source={{ uri: image }}
             >
               {" "}
             </Avatar>
@@ -107,11 +145,15 @@ const UserProfileScreen = () => {
             >
               Username
             </FormControl.Label>
-            <Input
-              placeholder="Tambua Evaristus"
-              value={name}
-              onChangeText={(name) => setName(name)}
-            />
+            {user ? (
+              <Input
+                placeholder={user.name ? user.name : "Enter username"}
+                value={ name }
+                onChangeText={(name) => setName(name)}
+              />
+            ) : (
+              <Text>User not found</Text>
+            )}
           </FormControl>
 
           <FormControl isDisabled>
@@ -122,13 +164,17 @@ const UserProfileScreen = () => {
             >
               email
             </FormControl.Label>
-            <Input
-              placeholder="John"
-              _disabled
-              value={auth.currentUser.email}
-              //   onChangeText={(name)=> setName(name)}
-              //   onChangeText={}
-            />
+            {user ? (
+              <Input
+                placeholder={user.email? user.email: "Enter email"}
+                _disabled
+                value={user.email? user.email: "Enter email"}
+                //   onChangeText={(name)=> setName(name)}
+                //   onChangeText={}
+              />
+            ) : (
+              <Text>User not found</Text>
+            )}
           </FormControl>
           <FormControl>
             <FormControl.Label
