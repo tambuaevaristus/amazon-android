@@ -3,11 +3,28 @@ import React from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import { Image } from "react-native";
 import LoginScreen from "./LoginScreen";
+import {
+  getAuth,
+ 
+} from "firebase/auth";
+import app from "../firebase";
 
 const OnboardingScreen = ({ navigation }) => {
+
+  const auth = getAuth();
+
   return (
     <Onboarding
-      onDone={() => navigation.navigate("Login")}
+      onDone={() => { auth.onAuthStateChanged(user=>{
+        if(user){
+          navigation.navigate("DrawerNavigation")
+        }else{
+          navigation.navigate("Login")
+        }
+      })
+
+  }
+    }
       pages={[
         {
           backgroundColor: "green",

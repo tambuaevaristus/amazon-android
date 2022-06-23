@@ -28,17 +28,7 @@ function Products() {
 
   return (
     <VStack>
-      {products.map((product) => {
-        return (
-        <Product
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          ratings={product.rating}
-          image="https://m.media-amazon.com/images/I/61Qu8KYuynS._SL1500_.jpg"
-        />)
-      })}
+     
 
       <Product
         id={2}
@@ -72,6 +62,19 @@ function Products() {
         ratings={5}
         image="https://moneymanafrica.com/uploads/images/202205/img_1920x_6296585bf22617-40344139-88324265.jpg"
       />
+       {products.map((product) => {
+        return (
+        <Product
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          // price={product.price}
+          price={500}
+          ratings={product.rating}
+          image={product.image}
+          // image="https://m.media-amazon.com/images/I/61Qu8KYuynS._SL1500_.jpg"
+        />)
+      })}
     </VStack>
   );
 }

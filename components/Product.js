@@ -5,9 +5,12 @@ import { Octicons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useStateValue } from "../StateProvider";
 import OnboardingScreen from "../screens/OnboardingScreen";
+import { useToast } from "native-base";
+
 
 const Product = ({id, title,image,price, description, ratings}) => {
 
+  const toast = useToast();
   const [{basket}, dispatch] = useStateValue("");
   
 
@@ -24,6 +27,15 @@ const Product = ({id, title,image,price, description, ratings}) => {
         ratings : ratings,
     }
     })
+    toast.show({
+      render: () => {
+        return (
+          <Box bg="emerald.500" px="2" py="1" rounded="sm" mb={5}>
+            Item added to Card
+          </Box>
+        );
+      },
+    });
 
     console.log("added"+ basket.length);
   } 

@@ -28,6 +28,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
+import { useToast } from "native-base";
 
 const AddProductScreen = () => {
 const auth = getAuth();
@@ -37,6 +38,7 @@ const auth = getAuth();
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState({});
   const productRef = collection(db, "products");
+  const toast = useToast();
   function handleSubmit() {
 
     addDoc(productRef,{
@@ -46,7 +48,19 @@ const auth = getAuth();
        rating: rating,
        userId : auth.currentUser.uid,
 
+    }).then(()=>{
+      toast.show({
+        render: () => {
+          return (
+            <Box bg="emerald.500" px="2" py="1" rounded="sm" mb={5}>
+              Product Added Successfully!!!
+            </Box>
+          );
+        },
+      });
     })
+
+    
 
     setTitle('');
     setDescription('');

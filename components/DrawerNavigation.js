@@ -11,6 +11,7 @@ import AppBar from "./AppBar";
 import Checkout from "./Checkout";
 import AddProductScreen from "../screens/AddProductScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
+import Footer from "./Footer";
 
 function DrawerNavigation() {
   const Drawer = createDrawerNavigator();
@@ -66,6 +67,9 @@ function DrawerNavigation() {
           />
         </Drawer.Navigator>
       {/* </NavigationContainer> */}
+
+
+      <Footer />
     </>
   );
 }
