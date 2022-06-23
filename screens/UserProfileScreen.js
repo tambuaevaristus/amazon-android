@@ -131,7 +131,7 @@ const UserProfileScreen = ({ navigation }) => {
               my="2"
               alignSelf="center"
               size="xl"
-              source={{uri: image}}
+              source= {user.image ? {uri: user.image} : {uri: image}}
             >
               {" "}
             </Avatar>
